@@ -14,6 +14,8 @@ setuptools.setup(
     include_package_data=True,
     install_requires=reqs,
     entry_points={
-        'console_scripts': [],
+        'console_scripts': [
+            'generate_name = fantasy_name_generator.scripts.generate_name:main'
+        ],
     },
 )

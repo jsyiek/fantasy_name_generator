@@ -5,20 +5,6 @@ from typing import Any, Dict, List, Set, Tuple, Union
 from fantasy_name_generator.data_processing.format_data import CARD_TYPE_TO_TRAINING_TYPE
 
 
-def safelog(value: Union[int, float]) -> float:
-    """
-    Performs the log operation on the inputted value, return float("-inf") for values that are 0
-
-    Parameters:
-        value (Union[int, float]): Non-negative integer to take log of
-
-    Returns:
-        float: Log of the number if > 0, else float("-inf")
-    """
-
-    return float("-inf") if value == 0 else math.log(value)
-
-
 def partition(partitionable: List[Any], size: int) -> List[Tuple[Any]]:
     """
     Partitions a list into a list of adjacent elements, such that each set of `size` consecutive elements are present

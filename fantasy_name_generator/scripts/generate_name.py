@@ -20,7 +20,7 @@ def parse_args():
                         default=10)
     parser.add_argument('--markov-order', help="Order of Markov Model to use. Higher orders increase coherence but "
                                                "reduce creativity.",
-                        type=int, default=3)
+                        type=int, default=2)
     parser.add_argument('--reset-cache', help="Resets the cached dataset. This may take some time.",
                         action='store_true')
 
