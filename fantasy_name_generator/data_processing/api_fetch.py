@@ -7,6 +7,7 @@ from typing import Any, Dict, List
 
 from fantasy_name_generator import REPOSITORY_PATH
 
+
 __CARDS_CACHE_PATH = os.path.join(REPOSITORY_PATH, "fantasy_name_generator", ".cards_data.dat")
 WEBSITE_URL = "https://api.magicthegathering.io/v1/cards"
 

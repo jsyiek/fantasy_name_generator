@@ -1,6 +1,16 @@
 from typing import Any, Dict, List
 
-import fantasy_name_generator.data_processing.api_fetch as api_fetch
+
+CARD_TYPE_TO_TRAINING_TYPE = {
+    'Creature': 'creature',
+    'Instant': 'spell',
+    'Sorcery': 'spell',
+    'Enchantment': 'enchantment',
+    'Legendary Creature': 'character',
+    'Artifact': 'artifact',
+    'Planeswalker': 'character',
+    'Land': 'land'
+}
 
 
 def format_data(cards: List[Dict[str, Any]]) -> List[Dict[str, str]]:
@@ -12,7 +22,28 @@ def format_data(cards: List[Dict[str, Any]]) -> List[Dict[str, str]]:
 
     Returns:
         List[Dict[str, str]]: A list of dictionaries, where each dictionary represents a card. The fields are:
-                              'type' -> either 'creature', 'spell', 'enchantment', or 'character'
+                              'type' -> either 'creature', 'spell', 'enchantment', 'character', 'artifact', or 'land'
                               'name' -> the fantasy name to train on
     """
-    pass
+    def format(name: str, card_types: List[str]):
+        """
+        Helper function standardize formatting the card data
+        """
+        if '//' in name:
+            name = name.split(' // ')
+        else:
+            name = []
+        for n in name:
+            for t in card_types:
+                card_standardized = {'type': CARD_TYPE_TO_TRAINING_TYPE[t], 'name': n.lower()}
+                formatted_data.append(card_standardized)
+
+    formatted_data = []
+    for c in cards:
+        if 'Legendary' in c.get('supertypes', []) and 'Creature' in c['types']:
+            format(c['name'], ['Legendary Creature'])
+        else:
+            for t in c['types']:
+                if CARD_TYPE_TO_TRAINING_TYPE.get(t):
+                    format(c['name'], c['types'])
+    return formatted_data
