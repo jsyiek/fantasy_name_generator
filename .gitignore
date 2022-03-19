@@ -1,3 +1,9 @@
+# Cached data
+*.cards_data.dat
+
+# Pycharm
+*.idea
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
